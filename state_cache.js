@@ -1,5 +1,5 @@
 (function(window, $) {
-	function HotSug (ele, options) {
+	function StateCache (ele, options) {
         var defaults = {
             cookieName: 'words-list',            
             hoverElem: 'div',
@@ -10,26 +10,26 @@
         this.$ele = $(ele);
         this.options = $.extend(defaults, options);
         this.init();
+        this.bindListeners();
     }
 
-    HotSug.prototype = {
+    StateCache.prototype = {
         init: function() {
             var _this = this;
             var value = $.cookie(this.options.cookieName);
 
             if(value) {
                 var arr = value.split(',');
-                this.$ele.find(_this.options.hoverElem).each(function() {
-                    for(var i=0;i<arr.length;i++) {
-                        if($(this).data('num')==arr[i]) {
+                this.$ele.find(this.options.hoverElem).each(function() {
+                    for(var i = 0; i < arr.length; i++) {
+                        if($(this).data('num') == arr[i]) {
                             $(this).find(_this.options.highlightElem).addClass('viewed');
                         }
                     }
                 });
             }
-            this.bindListener();
         },  
-        bindListener: function() {
+        bindListeners: function() {
             var _this = this;
             this.$ele.find(this.options.hoverElem).click(function () {
                 $(this).find(_this.options.highlightElem).addClass('viewed');
@@ -70,8 +70,8 @@
         }
     }
 
-    $.fn.hotSug = function(options) {
-        new HotSug(this, options);
+    $.fn.stateCache = function(options) {
+        new StateCache(this, options);
         return $(this);
     }
 })(window, jQuery);
