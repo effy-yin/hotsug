@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>百度首页热门新闻状态控制：新字消失、标记已读</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="jquery.cookie.js"></script>
+<script type="text/javascript" src="state_cache.js"></script>
+</head>
+<style type="text/css">
+.words-item a {
+    color: #333;
+    cursor: pointer;
+}
+.words-item .is-new {
+    display: none;
+}
+.words-item .show-new .is-new {
+    background: url("../static/image/new.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;   
+}
+.words-item span {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+}
+.words-item .viewed span {
+    color: red;
+}
+.words-item .viewed .is-new {
+    display: none;
+}
+.words-item a:hover span {
+    text-decoration: underline;
+    color: #0079f5;
+}
+</style>
+<body>
+<div>
+    <ul id="words-list" style="margin:20px">
+        <li>
+            <div class="words-item" data-num="0">
+                <a class="hot-item-link show-new" target="_blank" href="#">                    
+                    <span>地铁7号线东延</span>
+                    <em class="is-new"></em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="words-item" data-num="1">
+                <a class="hot-item-link show-new" target="_blank" href="#">                    
+                    <span>福建首虎落马</span>
+                    <em class="is-new"></em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="words-item" data-num="2">
+                <a class="hot-item-link " target="_blank" href="#">                    
+                    <span>雨天下跪被扇耳光</span>
+                    <em class="is-new"></em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="words-item" data-num="3">
+                <a class="hot-item-link" href="#">                    
+                    <span>深圳地铁踩踏</span>
+                    <em class="is-new"></em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="words-item" data-num="4">
+                <a class="hot-item-link" href="#">                    
+                    <span>深圳地铁踩踏</span>
+                    <em class="is-new"></em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="words-item" data-num="5">
+                <a class="hot-item-link" href="#">                    
+                    <span>深圳地铁踩踏</span>
+                    <em class="is-new"></em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="words-item" data-num="6">
+                <a class="hot-item-link" href="#">                    
+                    <span>深圳地铁踩踏</span>
+                    <em class="is-new"></em>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+
+$('#words-list').hotSug({cookieName: 'words-list',            
+            hoverElem: '.words-item',
+            highlightElem: '.hot-item-link',
+            changeTime: '2000', 
+            expires: 7});
+</script>
+</body>
+</html>
