@@ -1,12 +1,13 @@
 (function(window, $) {
-	function StateCache (wrapper, options) {
+	function StateCache (wrapper, options) {//$.removecookie('item-list')
         var defaults = {
-            cookieName: 'words-list',
-            dataName: 'cookie',      
+            cookieName: 'item-list',
+            dataName: 'num',      
             hoverElem: 'div',
             highlightElem: 'a',
             changeTime: '2000',
-            expires: 7
+            expires: 7,
+            maxCount: 10
         }
         this.$wrapper = $(wrapper);
         this.options = $.extend(defaults, options);
@@ -33,7 +34,11 @@
         bindListeners: function() {
             var _this = this;
             this.$wrapper.find(this.options.hoverElem).click(function () {
-                $(this).find(_this.options.highlightElem).addClass('viewed');
+                var highlightElem = $(this).find(_this.options.highlightElem);
+                if(!highlightElem.hasClass('viewed')) {   //放在事件内判断，不能放在事件外判断，否则定时器定义语句每次鼠标enter都会执行
+                    highlightElem.addClass('viewed');                
+                    _this.addCookie(this);
+                }
             });
 
             this.$wrapper.find(this.options.hoverElem).each(function() {
@@ -49,16 +54,7 @@
                         timerI = setInterval(function () {
                             if(longEnough) {
                                 highlightElem.addClass('viewed');
-                                var cookieValue = $(hoverElem).data(_this.options.dataName);
-                                var value = $.cookie(_this.options.cookieName) || '';
-                                if(value) {
-                                    var arr = value.split(',');
-                                    arr.push(cookieValue);
-                                    value = arr.join(',')
-                                } else {
-                                    value = index;
-                                }
-                                $.cookie(_this.options.cookieName, value, { expires: _this.options.expires});
+                                _this.addCookie(hoverElem);
                             }
                         }, 200);
                     }            
@@ -67,7 +63,27 @@
                     clearInterval(timerI);                        
                 });
             });
+        },
 
+        addCookie: function(hoverElem) {
+            var index = $(hoverElem).data(this.options.dataName);
+            var value = $.cookie(this.options.cookieName) || '';
+            if(value) {
+                var arr = value.split(',');                                    
+                arr.push(index);
+                if(arr.length > this.options.maxCount) {
+                    var newArr = [];
+                    for(var i = parseInt(this.options.maxCount/2); i < arr.length; i++)
+                        newArr[i - parseInt(this.options.maxCount/2)] = arr[i];
+                    value = newArr.join(',')
+                } else {
+                    value = arr.join(',')
+                }
+                
+            } else {
+                value = index;
+            }
+            $.cookie(this.options.cookieName, value, { expires: this.options.expires});
         }
     }
 

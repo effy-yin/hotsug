@@ -5,7 +5,7 @@
 <title>阅读状态缓存demo</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="jquery.cookie.js"></script>
-<script type="text/javascript" src="state_cache.js"></script>
+<script type="text/javascript" src="state-cache.js"></script>
 </head>
 <style type="text/css">
 .item-list {
@@ -75,7 +75,8 @@ $('.item-list').stateCache({cookieName: 'item-list',
                             hoverElem: 'li',
                             highlightElem: 'div',
                             changeTime: '1500', 
-                            expires: 7});
+                            expires: 7,
+                            maxCount: 4});
 </script>
 </body>
 </html>

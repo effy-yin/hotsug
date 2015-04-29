@@ -5,7 +5,7 @@
 <title>阅读状态缓存demo</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="jquery.cookie.js"></script>
-<script type="text/javascript" src="state_cache.js"></script>
+<script type="text/javascript" src="state-cache.js"></script>
 </head>
 <style type="text/css">
 .words-item a {
@@ -106,7 +106,8 @@ var st1 = new StateCache('#words-list', {cookieName: 'words-list',
                                          hoverElem: '.words-item',
                                          highlightElem: '.hot-item-link',
                                          changeTime: '2000', 
-                                         expires: 7});
+                                         expires: 7,
+                                         maxCount: 4});
 </script>
 </body>
 </html>
