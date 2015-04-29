@@ -1,4 +1,7 @@
 (function(window, $) {
+    
+    'use strict';
+
 	function StateCache (wrapper, options) {//$.removecookie('item-list')
         var defaults = {
             cookieName: 'item-list',
