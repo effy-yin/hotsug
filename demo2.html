@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>百度首页热门新闻状态控制：新字消失、标记已读</title>
+<title>阅读状态缓存demo</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="jquery.cookie.js"></script>
 <script type="text/javascript" src="state_cache.js"></script>
@@ -30,37 +30,37 @@
 <body>
 <div>
     <ul class="item-list" style="margin:20px">
-        <li data-num="0">
+        <li data-cookie="0">
 			<div>           
                 <a target="_blank" href="#">                    
                 </a>
             </div> 
         </li>
-       <li data-num="1">
+       <li data-cookie="1">
             <div>   
                 <a target="_blank" href="#">                    
                 </a>
             </div> 
         </li>
-        <li data-num="2">
+        <li data-cookie="2">
             <div>   
                 <a target="_blank" href="#">                    
                 </a>
             </div> 
         </li>
-        <li data-num="3">
+        <li data-cookie="3">
 			<div>           
                 <a target="_blank" href="#">                    
                 </a>
             </div> 
         </li>
-       <li data-num="4">
+       <li data-cookie="4">
             <div>   
                 <a target="_blank" href="#">                    
                 </a>
             </div> 
         </li>
-        <li data-num="5">
+        <li data-cookie="5">
             <div>   
                 <a target="_blank" href="#">                    
                 </a>
@@ -70,11 +70,12 @@
 </div>
 <script type="text/javascript">
 
-$('.item-list').stateCache({cookieName: 'item-list',            
-            hoverElem: 'li',
-            highlightElem: 'div',
-            changeTime: '1500', 
-            expires: 7});
+$('.item-list').stateCache({cookieName: 'item-list',
+                            dataName: 'cookie', 
+                            hoverElem: 'li',
+                            highlightElem: 'div',
+                            changeTime: '1500', 
+                            expires: 7});
 </script>
 </body>
 </html>
