@@ -1,8 +1,8 @@
-(function(window, $) {
+(function (window, $) {
     
     'use strict';
 
-	function StateCache (wrapper, options) {//$.removecookie('item-list')
+	function StateCache(wrapper, options) {//$.removecookie('item-list')
         var defaults = {
             cookieName: 'item-list',
             dataName: 'num',      
@@ -19,62 +19,72 @@
     }
 
     StateCache.prototype = {
-        init: function() {
-            var _this = this;
-            var value = $.cookie(this.options.cookieName);
+        init: function () {
+            var _this = this,
+                value = Cookies.get(this.options.cookieName);
 
-            if(value) {
+            if (value) {
                 var arr = value.split(',');
-                this.$wrapper.find(this.options.hoverElem).each(function() {
+                this.$wrapper.find(this.options.hoverElem).each(function () {
                     for(var i = 0; i < arr.length; i++) {
-                        if($(this).data(_this.options.dataName) == arr[i]) {
+                        if ($(this).data(_this.options.dataName) == arr[i]) {
                             $(this).find(_this.options.highlightElem).addClass('viewed');
                         }
                     }
                 });
             }
-        },  
-        bindListeners: function() {
-            var _this = this;
+        }, 
+
+        bindListeners: function () {
+            var _this = this,
+                highlightElem;
+
             this.$wrapper.find(this.options.hoverElem).click(function () {
-                var highlightElem = $(this).find(_this.options.highlightElem);
-                if(!highlightElem.hasClass('viewed')) {   //放在事件内判断，不能放在事件外判断，否则定时器定义语句每次鼠标enter都会执行
+                highlightElem = $(this).find(_this.options.highlightElem);
+                if (!highlightElem.hasClass('viewed')) {   //放在事件内判断，不能放在事件外判断，否则定时器定义语句每次鼠标enter都会执行
                     highlightElem.addClass('viewed');                
                     _this.addCookie(this);
                 }
             });
 
-            this.$wrapper.find(this.options.hoverElem).each(function() {
-                var timerO, timerI, longEnough = false, hoverElem = this;
+            this.$wrapper.find(this.options.hoverElem).each(function () {
+                var hoverElem = this,
+                    highlightElem,
+                    timerO, 
+                    timerI, 
+                    longEnough = false;
 
-                $(this).mouseenter(function() {
-                    var highlightElem = $(this).find(_this.options.highlightElem);
-                    if(!highlightElem.hasClass('viewed')) {   //放在事件内判断，不能放在事件外判断，否则定时器定义语句每次鼠标enter都会执行
+                $(this).mouseenter(function () {
+                    highlightElem = $(this).find(_this.options.highlightElem);
+                    if (!highlightElem.hasClass('viewed')) {   //放在事件内判断，不能放在事件外判断，否则定时器定义语句每次鼠标enter都会执行
              
-                        timerO = setTimeout(function() {
+                        timerO = setTimeout(function () {
                             longEnough = true;
                         }, _this.options.changeTime);
+
                         timerI = setInterval(function () {
-                            if(longEnough) {
+                            if (longEnough) {
                                 highlightElem.addClass('viewed');
                                 _this.addCookie(hoverElem);
                             }
                         }, 200);
                     }            
-                }).mouseleave(function() {
+                }).mouseleave(function () {
                     clearTimeout(timerO)
                     clearInterval(timerI);                        
                 });
             });
         },
 
-        addCookie: function(hoverElem) {
-            var index = $(hoverElem).data(this.options.dataName);
-            var value = $.cookie(this.options.cookieName) || '';
-            if(value) {
-                var arr = value.split(',');                                    
+        addCookie: function (hoverElem) {
+            var index = $(hoverElem).data(this.options.dataName),
+                value = Cookies.get(this.options.cookieName) || '',
+                arr;
+                
+            if (value) {
+                arr = value.split(',');                                    
                 arr.push(index);
-                if(arr.length > this.options.maxCount) {
+                if (arr.length > this.options.maxCount) {
                     var newArr = [];
                     for(var i = parseInt(this.options.maxCount/2); i < arr.length; i++)
                         newArr[i - parseInt(this.options.maxCount/2)] = arr[i];
@@ -86,13 +96,13 @@
             } else {
                 value = index;
             }
-            $.cookie(this.options.cookieName, value, { expires: this.options.expires});
+            Cookies.set(this.options.cookieName, value, {expires: this.options.expires});
         }
     }
 
     window.StateCache = StateCache;
 
-    $.fn.stateCache = function(options) {
+    $.fn.stateCache = function (options) {
         new StateCache(this, options);
         return $(this);
     }
