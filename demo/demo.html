@@ -2,21 +2,21 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>阅读状态缓存demo</title>
+<title>hot推荐及阅读状态缓存demo</title>
 
 </head>
 <style type="text/css">
 .words-item a {
-    color: #333;
+    color: red;
     cursor: pointer;
 }
 .words-item .is-new {
     display: none;
 }
 .words-item .show-new .is-new {
-    background: url("../static/image/new.png");
+    background: url("hot.png");
     display: inline-block;
-    width: 16px;
+    width: 22px;
     height: 16px;
     vertical-align: middle;   
 }
@@ -26,7 +26,7 @@
     vertical-align: middle;
 }
 .words-item .viewed span {
-    color: red;
+    color: #333;
 }
 .words-item .viewed .is-new {
     display: none;
@@ -134,7 +134,7 @@
 </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="../js.cookie.js"></script>
-<script type="text/javascript" src="../statecache.js"></script>
+<script type="text/javascript" src="../hotsug.js"></script>
 <script type="text/javascript">
 
 var sc = new StateCache('#words-list', {cookieName: 'words-list',

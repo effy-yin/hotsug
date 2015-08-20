@@ -1,4 +1,4 @@
-(function (window, $) {
+(function(window, $) {
     
     'use strict';
 
@@ -19,13 +19,13 @@
     }
 
     StateCache.prototype = {
-        init: function () {
+        init: function() {
             var _this = this,
                 value = Cookies.get(this.options.cookieName);
 
             if (value) {
                 var arr = value.split(',');
-                this.$wrapper.find(this.options.hoverElem).each(function () {
+                this.$wrapper.find(this.options.hoverElem).each(function() {
                     for(var i = 0; i < arr.length; i++) {
                         if ($(this).data(_this.options.dataName) == arr[i]) {
                             $(this).find(_this.options.highlightElem).addClass('viewed');
@@ -35,11 +35,11 @@
             }
         }, 
 
-        bindListeners: function () {
+        bindListeners: function() {
             var _this = this,
                 highlightElem;
 
-            this.$wrapper.find(this.options.hoverElem).click(function () {
+            this.$wrapper.find(this.options.hoverElem).click(function() {
                 highlightElem = $(this).find(_this.options.highlightElem);
                 if (!highlightElem.hasClass('viewed')) {   //放在事件内判断，不能放在事件外判断，否则定时器定义语句每次鼠标enter都会执行
                     highlightElem.addClass('viewed');                
@@ -47,36 +47,36 @@
                 }
             });
 
-            this.$wrapper.find(this.options.hoverElem).each(function () {
+            this.$wrapper.find(this.options.hoverElem).each(function() {
                 var hoverElem = this,
                     highlightElem,
                     timerO, 
                     timerI, 
                     longEnough = false;
 
-                $(this).mouseenter(function () {
+                $(this).mouseenter(function() {
                     highlightElem = $(this).find(_this.options.highlightElem);
                     if (!highlightElem.hasClass('viewed')) {   //放在事件内判断，不能放在事件外判断，否则定时器定义语句每次鼠标enter都会执行
              
-                        timerO = setTimeout(function () {
+                        timerO = setTimeout(function() {
                             longEnough = true;
                         }, _this.options.changeTime);
 
-                        timerI = setInterval(function () {
+                        timerI = setInterval(function() {
                             if (longEnough) {
                                 highlightElem.addClass('viewed');
                                 _this.addCookie(hoverElem);
                             }
                         }, 200);
                     }            
-                }).mouseleave(function () {
+                }).mouseleave(function() {
                     clearTimeout(timerO)
                     clearInterval(timerI);                        
                 });
             });
         },
 
-        addCookie: function (hoverElem) {
+        addCookie: function(hoverElem) {
             var index = $(hoverElem).data(this.options.dataName),
                 value = Cookies.get(this.options.cookieName) || '',
                 arr;
@@ -102,7 +102,7 @@
 
     window.StateCache = StateCache;
 
-    $.fn.stateCache = function (options) {
+    $.fn.stateCache = function(options) {
         new StateCache(this, options);
         return $(this);
     }
