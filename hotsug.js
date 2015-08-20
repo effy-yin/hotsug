@@ -2,7 +2,7 @@
     
     'use strict';
 
-	function StateCache(wrapper, options) {//$.removecookie('item-list')
+	function HotSug(wrapper, options) {//$.removecookie('item-list')
         var defaults = {
             cookieName: 'item-list',
             dataName: 'num',      
@@ -18,7 +18,7 @@
         this.bindListeners();
     }
 
-    StateCache.prototype = {
+    HotSug.prototype = {
         init: function() {
             var _this = this,
                 value = Cookies.get(this.options.cookieName);
@@ -100,10 +100,10 @@
         }
     }
 
-    window.StateCache = StateCache;
+    window.HotSug = HotSug;
 
-    $.fn.stateCache = function(options) {
-        new StateCache(this, options);
+    $.fn.hotsug = function(options) {
+        new HotSug(this, options);
         return $(this);
     }
     
