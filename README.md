@@ -8,13 +8,13 @@
 
 ![screen](https://raw.github.com/dodoroy/hotsug/master/demo/demo2.png)
 ## Usage
-1. Include jQuery, js-cookie.js and hotsug.js.
+1.Include jQuery, js-cookie.js and hotsug.js.
 ```javascript
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="js.cookie.js"></script>
 <script type="text/javascript" src="hotsug.js"></script>
 ```
-2. Create html to hold the content.
+2.Create html to hold the content.
 ```html
 <ul class="item-list">
   <li data-num="0">...</li>
@@ -26,7 +26,7 @@
   <li data-num="6">...</li>
 </ul>
 ```
-3. Create HotSug instance.
+3.Create HotSug instance.
 ```javascript
 var hot = new HotSug('#item-list', {options..});
 ```
