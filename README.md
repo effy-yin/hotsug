@@ -1,6 +1,12 @@
 # hotsug
 百度首页热搜风云榜-阅读状态改变及cookie保存插件
 
+##Demo
+*[Demo](http://htmlpreview.github.io/?https://github.com/dodoroy/hotsug/blob/master/demo.html)*
+
+![screen](https://raw.github.com/dodoroy/hotsug/master/demo/demo1.png)
+
+![screen](https://raw.github.com/dodoroy/hotsug/master/demo/demo2.png)
 ## Usage
 1. Include jQuery, js-cookie.js and hotsug.js.
 ```javascript
