@@ -137,21 +137,21 @@
 <script type="text/javascript" src="../hotsug.js"></script>
 <script type="text/javascript">
 
-var sc = new HotSug('#words-list', {cookieName: 'words-list',
-                                         dataName: 'num', 
-                                         hoverElem: '.words-item',
-                                         highlightElem: '.hot-item-link',
-                                         changeTime: '2000', 
-                                         expires: 7,
-                                         maxCount: 4});
+var hot = new HotSug('#words-list', {cookieName: 'words-list',
+                                     dataName: 'num', 
+                                     hoverElem: '.words-item',
+                                     highlightElem: '.hot-item-link',
+                                     changeTime: '2000', 
+                                     expires: 7,
+                                     maxCount: 4});
 
 $('.item-list').hotsug({cookieName: 'item-list',
-                            dataName: 'cookie', 
-                            hoverElem: 'li',
-                            highlightElem: 'div',
-                            changeTime: '1500', 
-                            expires: 1,
-                            maxCount: 4});
+                        dataName: 'cookie', 
+                        hoverElem: 'li',
+                        highlightElem: 'div',
+                        changeTime: '1500', 
+                        expires: 1,
+                        maxCount: 4});
 </script>
 </body>
 </html>
